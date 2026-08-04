@@ -9,7 +9,7 @@
 {
   # Needed so Nushell is accepted as a login shell (some tools check
   # /etc/shells before letting you `chsh` or log in with it).
-  environment.shells = [ pkgs.nu ];
+  environment.shells = [ pkgs.nushell ];
 
   # Installs the `starship` binary and (for bash/zsh/fish) wires up their
   # interactive shell init automatically. Nushell's own wiring is the
