@@ -1,11 +1,12 @@
 # nixos-config (WSL flake-base)
 
 A shared NixOS 26.05 flake configuration for the team's WSL2 development
-environments. One `git clone` + one script gets you: git, VS Code,
-Docker, a Rust stable toolchain (with the `musl` + `gnu` Linux targets),
-a system Python with the project's libraries, PostgreSQL, and
-LSPs/formatters for Rust/Python/Nix -- all pinned to the exact same
-versions as everyone else on the team.
+environments. One `git clone` + one script gets you: git, Kate, helix,
+kitty, Konsole, Nushell (the default shell) with a Starship prompt and
+the JetBrainsMono Nerd Font, Docker, a Rust stable toolchain (with the
+`musl` + `gnu` Linux targets), a system Python with the project's
+libraries, PostgreSQL, and LSPs/formatters for Rust/Python/Nix -- all
+pinned to the exact same versions as everyone else on the team.
 
 You do **not** need to know Nix to use this day-to-day. You do need
 Nix/NixOS knowledge to *change* it -- see [Extending this
@@ -58,13 +59,15 @@ curl -fsSL https://raw.githubusercontent.com/veratomas/nixos-isat-wsl/main/scrip
 This will:
 
 - Clone this repo to `~/nixos-config`
-- Ask for a **username** and **hostname** for this machine (stored only
-  in the gitignored `hosts/wsl/local.nix` -- see
-  [Git and secrets](#git-and-secrets))
 - Run the first `nixos-rebuild switch`, which installs everything above
 
 The first run downloads a lot and can take a while, especially on a slow
 connection -- that's normal.
+
+This uses the team's fallback username (`nixos`) and hostname
+(`nixos-wsl`). Want your own instead? See
+[Git and secrets](#git-and-secrets) for how to set that, either before or
+after running the script.
 
 Prefer to do it by hand instead of curl-piping a script? That's exactly
 what the script itself does, so this works too:
@@ -150,8 +153,11 @@ modules/
   users.nix                      the default user account
   git.nix                        system-wide git config
   secrets.nix                    documentation only -- see "where do secrets go?"
+  shell.nix                      Nushell (default shell) + Starship prompt
+  fonts.nix                      JetBrainsMono Nerd Font
   packages/
-    editors.nix                  VS Code
+    editors.nix                  Kate, helix
+    terminals.nix                kitty, Konsole
     rust.nix                     Rust stable toolchain (rust-overlay) + targets
     python.nix                   Python + project libraries + pyright/ruff
     nix-tooling.nix              nixd + nixfmt, for editing this repo
@@ -199,13 +205,13 @@ git config --global user.name  "Your Name"
 git config --global user.email "you@example.com"
 ```
 
-**Your username and hostname:** `scripts/bootstrap.sh` asks for these on
-first install and writes them to `hosts/wsl/local.nix`. Want to change
-them later, or set them by hand? Copy `hosts/wsl/local.nix.example` to
-`hosts/wsl/local.nix` and edit the `wsl.defaultUser` /
-`networking.hostName` lines -- see the comments in `modules/wsl.nix` for
-why it's best to decide these *before* your first rebuild rather than
-after.
+**Your username and hostname:** by default you get the team's fallback
+values (`nixos` / `nixos-wsl`, set in `modules/wsl.nix` and
+`hosts/wsl/default.nix`). Want your own? Copy
+`hosts/wsl/local.nix.example` to `hosts/wsl/local.nix` and edit the
+`wsl.defaultUser` / `networking.hostName` lines -- see the comments in
+`modules/wsl.nix` for why it's best to decide these *before* your first
+rebuild rather than after.
 
 **Secrets in general (API tokens, DB passwords, registry credentials):** never go
 in a tracked `*.nix` file -- this repo is meant to live on GitHub.
@@ -220,11 +226,18 @@ system config.
 
 ## Troubleshooting
 
-**VS Code won't open a window, or is very slow / choppy.** This is
-WSLg's job, and `wsl.useWindowsDriver = true` in `modules/wsl.nix` is
-what makes it GPU-accelerated instead of CPU-rendered. Try `wsl
---shutdown` from PowerShell and reopening your terminal first (WSLg
-occasionally needs a fresh session after a Windows update).
+**A GUI app (Kate, Konsole, kitty) won't open a window, or is very slow /
+choppy.** This is WSLg's job, and `wsl.useWindowsDriver = true` in
+`modules/wsl.nix` is what makes it GPU-accelerated instead of
+CPU-rendered. Try `wsl --shutdown` from PowerShell and reopening your
+terminal first (WSLg occasionally needs a fresh session after a Windows
+update).
+
+**Starship prompt or Nerd Font icons look wrong / show boxes.** Make
+sure your terminal (kitty, Konsole, or Windows Terminal if you're using
+that instead) is actually configured to use "JetBrainsMono Nerd Font" --
+see `modules/fonts.nix`. Installing the font doesn't change any app's
+configured font for you.
 
 **`docker` says "permission denied" or "Cannot connect to the Docker
 daemon".** You likely need to close and reopen your WSL terminal (or

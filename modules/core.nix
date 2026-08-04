@@ -43,13 +43,6 @@
     };
   };
 
-  # VS Code's official build is marked "unfree" in nixpkgs (proprietary MS
-  # branding/telemetry bits), which is why this is needed for
-  # modules/packages/editors.nix to work. If your team would rather stay
-  # 100% FOSS, swap `pkgs.vscode` for `pkgs.vscodium` there and you can
-  # remove this line.
-  nixpkgs.config.allowUnfree = true;
-
   # ---------------------------------------------------------------------
   # Locale
   # ---------------------------------------------------------------------

@@ -13,8 +13,11 @@
     ../../modules/users.nix
     ../../modules/git.nix
     ../../modules/secrets.nix
+    ../../modules/shell.nix
+    ../../modules/fonts.nix
 
     ../../modules/packages/editors.nix
+    ../../modules/packages/terminals.nix
     ../../modules/packages/rust.nix
     ../../modules/packages/python.nix
     ../../modules/packages/nix-tooling.nix
@@ -29,8 +32,8 @@
   # Shows up in `hostname`, shell prompts, etc. Purely cosmetic, and
   # per-developer -- these are `mkDefault` specifically so that
   # hosts/wsl/local.nix (gitignored, one per machine) can override them
-  # with a plain assignment with no conflict. scripts/bootstrap.sh will
-  # offer to set both of these for you interactively on first install;
+  # with a plain assignment with no conflict. Copy
+  # hosts/wsl/local.nix.example to hosts/wsl/local.nix to set your own;
   # you only need to touch this file if you want to change the *team's*
   # fallback default.
   networking.hostName = lib.mkDefault "nixos-wsl";

@@ -13,7 +13,7 @@
       "wheel" # sudo access
       "docker" # run `docker` without sudo -- see modules/docker.nix
     ];
-    shell = pkgs.bash; # swap for pkgs.zsh / pkgs.fish if your team prefers; remember to also set programs.<shell>.enable = true;
+    shell = pkgs.nushell; # configured in modules/shell.nix (aliases, Starship prompt); swap for pkgs.bash / pkgs.zsh / pkgs.fish if your team prefers, and update that file to match
   };
 
   # No password is set here on purpose: NixOS-WSL logs you straight into

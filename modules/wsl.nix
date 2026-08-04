@@ -13,11 +13,11 @@
 
     # The Linux user you land in when you open a WSL terminal or launch a
     # GUI app shortcut. "nixos" is just the fallback default -- each
-    # developer can (and should) set their own in hosts/wsl/local.nix,
-    # which scripts/bootstrap.sh will offer to create for you
-    # interactively on first install. Referenced from modules/users.nix,
-    # so overriding it here is all you need to do; the user account
-    # follows automatically.
+    # developer can (and should) set their own by copying
+    # hosts/wsl/local.nix.example to hosts/wsl/local.nix and editing it
+    # (see that file, and modules/secrets.nix). Referenced from
+    # modules/users.nix, so overriding it here is all you need to do; the
+    # user account follows automatically.
     #
     # Pick your value BEFORE your first rebuild if you can: NixOS-WSL
     # creates the matching home directory as part of that first build,
@@ -26,8 +26,9 @@
     # change this and rebuild".
     defaultUser = lib.mkDefault "nixos";
 
-    # Adds Start Menu entries for GUI apps installed in this config (VS
-    # Code, etc.) so they show up and behave like normal Windows apps.
+    # Adds Start Menu entries for GUI apps installed in this config (Kate,
+    # Konsole, kitty, etc.) so they show up and behave like normal Windows
+    # apps.
     startMenuLaunchers = true;
 
     # --- GUI / "window passthrough" -------------------------------------

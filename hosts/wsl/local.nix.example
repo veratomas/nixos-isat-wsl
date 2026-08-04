@@ -9,11 +9,6 @@
 # That exact filename (hosts/wsl/local.nix) is listed in .gitignore, and
 # hosts/wsl/default.nix imports it automatically if it exists. Everything
 # in here is optional -- delete whatever you don't need.
-#
-# In practice you'll rarely create this by hand: scripts/bootstrap.sh
-# prompts for a username and hostname on first install and writes them
-# here for you. It's documented manually below mainly so you know what
-# it did, and in case you want to change something later.
 { pkgs, lib, ... }:
 
 {
