@@ -1,0 +1,38 @@
+# hosts/wsl/local.nix.example
+#
+# Copy this file to `local.nix` in the same directory to set
+# machine-specific values without touching version-controlled files, or
+# ever committing a secret:
+#
+#   cp hosts/wsl/local.nix.example hosts/wsl/local.nix
+#
+# That exact filename (hosts/wsl/local.nix) is listed in .gitignore, and
+# hosts/wsl/default.nix imports it automatically if it exists. Everything
+# in here is optional -- delete whatever you don't need.
+#
+# In practice you'll rarely create this by hand: scripts/bootstrap.sh
+# prompts for a username and hostname on first install and writes them
+# here for you. It's documented manually below mainly so you know what
+# it did, and in case you want to change something later.
+{ pkgs, lib, ... }:
+
+{
+  # Your own username and machine hostname, instead of the team fallback
+  # defaults ("nixos" / "nixos-wsl") set in modules/wsl.nix and
+  # hosts/wsl/default.nix. Set BEFORE your first rebuild if possible --
+  # see the comment above `defaultUser` in modules/wsl.nix for why.
+  # wsl.defaultUser = "alice";
+  # networking.hostName = "alice-wsl";
+
+  # Override the team default timezone for just this machine:
+  # time.timeZone = "Europe/Berlin";
+
+  # Fully declarative git identity, if you'd rather not run `git config
+  # --global` by hand (see modules/git.nix for the normal approach):
+  # programs.git.config = {
+  #   user.name = "Your Name";
+  #   user.email = "you@example.com";
+  # };
+
+  # Anything else host- or person-specific goes here.
+}

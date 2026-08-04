@@ -1,0 +1,17 @@
+# Nix build outputs
+result
+result-*
+
+# Machine-specific / secret overrides -- see modules/secrets.nix
+hosts/*/local.nix
+
+# Editor cruft
+.vscode/
+.direnv/
+
+# OS junk
+.DS_Store
+
+# NOTE: flake.lock is intentionally NOT ignored. It must be committed --
+# it's what makes everyone's `nixos-rebuild` reproducible. See the README
+# section "Updating the OS" before running `nix flake update`.
