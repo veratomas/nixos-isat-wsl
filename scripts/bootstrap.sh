@@ -27,7 +27,7 @@
 set -euo pipefail
 
 # TODO: update this once the repo has a real home on GitHub.
-REPO_URL="${REPO_URL:-https://github.com/<YOUR_ORG>/<YOUR_REPO>.git}"
+REPO_URL="${REPO_URL:-https://github.com/veratomas/nixos-isat-wsl.git}"
 CLONE_DIR="${CLONE_DIR:-$HOME/nixos-config}"
 FLAKE_TARGET="wsl" # matches `nixosConfigurations.wsl` in flake.nix
 

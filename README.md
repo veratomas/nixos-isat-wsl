@@ -52,12 +52,8 @@ From here on, everything happens *inside* that NixOS shell.
 ## First-time setup
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<YOUR_ORG>/<YOUR_REPO>/main/scripts/bootstrap.sh | bash
+curl -fsSL https://raw.githubusercontent.com/veratomas/nixos-isat-wsl/main/scripts/bootstrap.sh | bash
 ```
-
-> **TODO for whoever sets this repo up:** replace `<YOUR_ORG>/<YOUR_REPO>`
-> above (and in `scripts/bootstrap.sh`) with this repo's real GitHub
-> path once it exists.
 
 This will:
 
@@ -74,7 +70,7 @@ Prefer to do it by hand instead of curl-piping a script? That's exactly
 what the script itself does, so this works too:
 
 ```bash
-git clone https://github.com/<YOUR_ORG>/<YOUR_REPO>.git ~/nixos-config
+git clone https://github.com/veratomas/nixos-isat-wsl.git ~/nixos-config
 cd ~/nixos-config
 ./scripts/bootstrap.sh
 ```
