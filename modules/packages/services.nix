@@ -34,7 +34,7 @@
     # Declaratively create a role + database per project instead of
     # everyone running `createuser`/`createdb` by hand. Example -- edit
     # to match your project(s) and uncomment:
-    # ensureDatabases = [ "myapp" ];
+    ensureDatabases = [ "sisar" ];
     # ensureUsers = [
     #   {
     #     name = "myapp";
