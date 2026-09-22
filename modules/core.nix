@@ -79,4 +79,5 @@
     tree
     htop
   ];
+  nixpkgs.config.allowUnfree = true;
 }
